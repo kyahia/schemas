@@ -1,0 +1,385 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "process_onc_build": {
+      "type": "object",
+      "properties": {
+        "client_profile": {
+          "type": "object",
+          "properties": {
+            "client_name": {
+              "type": "string"
+            },
+            "dedicated_vrf": {
+              "type": "boolean"
+            },
+            "mpls_bte": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "client_name",
+            "dedicated_vrf",
+            "mpls_bte"
+          ],
+          "additionalProperties": false
+        },
+        "network": {
+          "type": "object",
+          "properties": {
+            "dedicated_wan_ips": {
+              "type": "boolean"
+            },
+            "netbox": {
+              "type": "object",
+              "properties": {
+                "netbox_url": {
+                  "type": "string"
+                },
+                "netbox_token": {
+                  "type": "string"
+                },
+                "tenant_group": {
+                  "type": "string"
+                },
+                "vrfs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rd": {
+                        "type": "string"
+                      },
+                      "suffix": {
+                        "type": "string"
+                      },
+                      "vni_prefix": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "rd",
+                      "suffix"
+                    ],
+                    "additionalProperties": true
+                  }
+                },
+                "subnet_prefixes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rd": {
+                        "type": "string"
+                      },
+                      "ip": {
+                        "type": "string"
+                      },
+                      "prefix_type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "ip",
+                      "prefix_type"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "lan_ips": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rd": {
+                        "type": "string"
+                      },
+                      "ip": {
+                        "type": "string"
+                      },
+                      "host_name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "ip",
+                      "host_name"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "wan_ips": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ip": {
+                        "type": "string"
+                      },
+                      "rd": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "ip"
+                    ]
+                  }
+                },
+                "vlan_bte_id": {
+                  "type": "string"
+                },
+                "port_channels": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "device_name": {
+                        "type": "string"
+                      },
+                      "channel_type": {
+                        "type": "string"
+                      },
+                      "mtu": {
+                        "type": "integer"
+                      },
+                      "mode": {
+                        "type": "string"
+                      },
+                      "ip": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "device_name",
+                      "ip"
+                    ]
+                  }
+                },
+                "interfaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "vlan_id": {
+                        "type": "integer"
+                      },
+                      "device_name": {
+                        "type": "string"
+                      },
+                      "interface_type": {
+                        "type": "string"
+                      },
+                      "mtu": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "vlan_id",
+                      "device_name"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "netbox_url",
+                "netbox_token",
+                "tenant_group",
+                "lan_ips",
+                "subnet_prefixes"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "dedicated_wan_ips",
+            "netbox"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "client_profile",
+        "network"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "process_onc_build"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "client_profile": {
+                "properties": {
+                  "dedicated_vrf": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "network": {
+                    "properties": {
+                      "netbox": {
+                        "required": [
+                          "vrfs"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "network": {
+                    "properties": {
+                      "netbox": {
+                        "properties": {
+                          "subnet_prefixes": {
+                            "required": [
+                              "rd"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "network": {
+                    "properties": {
+                      "netbox": {
+                        "properties": {
+                          "lan_ips": {
+                            "required": [
+                              "rd"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "network": {
+                    "properties": {
+                      "netbox": {
+                        "properties": {
+                          "wan_ips": {
+                            "required": [
+                              "rd"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "client_profile": {
+                "properties": {
+                  "mpls_bte": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "network": {
+                "properties": {
+                  "netbox": {
+                    "required": [
+                      "vlan_bte_id",
+                      "port_channels",
+                      "interfaces"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "network": {
+                "properties": {
+                  "dedicated_wan_ips": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "network": {
+                "properties": {
+                  "netbox": {
+                    "required": [
+                      "wan_ips"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
