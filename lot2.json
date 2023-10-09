@@ -1,0 +1,727 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "process_onc_build": {
+      "type": "object",
+      "properties": {
+        "client_profile": {
+          "type": "object",
+          "properties": {
+            "client_name": {
+              "type": "string"
+            },
+            "dedicated_vrf": {
+              "type": "boolean"
+            },
+            "mpls_bte": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "client_name",
+            "dedicated_vrf",
+            "mpls_bte"
+          ]
+        },
+        "deployment": {
+          "type": "object",
+          "properties": {
+            "serial": {
+              "type": "string"
+            },
+            "mssql": {
+              "type": "boolean"
+            },
+            "metrology": {
+              "type": "boolean"
+            },
+            "custom_nat_rules": {
+              "type": "boolean"
+            },
+            "custom_firewall_rules": {
+              "type": "boolean"
+            },
+            "preparation": {
+              "type": "object",
+              "properties": {
+                "truenas": {
+                  "type": "object",
+                  "properties": {
+                    "truenas_api_key": {
+                      "type": "string"
+                    },
+                    "truenas_base_url": {
+                      "type": "string"
+                    },
+                    "dataset_M_size": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "truenas_api_key",
+                    "truenas_base_url",
+                    "dataset_M_size"
+                  ]
+                },
+                "veeam_retention_period": {
+                  "type": "integer"
+                },
+                "snat_ip": {
+                  "type": "string"
+                },
+                "mssql_ip": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "truenas"
+              ]
+            },
+            "provisioning": {
+              "type": "object",
+              "properties": {
+                "nsx-networking": {
+                  "type": "object",
+                  "properties": {
+                    "nsx_password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "nsx_password"
+                  ]
+                },
+                "metrology": {
+                  "type": "object",
+                  "properties": {
+                    "influxdb_admin_password": {
+                      "type": "string"
+                    },
+                    "influxdb_db_password": {
+                      "type": "string"
+                    },
+                    "grafana_admin_user": {
+                      "type": "string"
+                    },
+                    "grafana_admin_password": {
+                      "type": "string"
+                    },
+                    "grafana_user_password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "influxdb_admin_password",
+                    "influxdb_db_password",
+                    "grafana_admin_user",
+                    "grafana_admin_password",
+                    "grafana_user_password"
+                  ]
+                },
+                "vm_gw": {
+                  "type": "object",
+                  "properties": {
+                    "administrateur_password": {
+                      "type": "string"
+                    },
+                    "admoncloud_password": {
+                      "type": "string"
+                    },
+                    "choco_password": {
+                      "type": "string"
+                    },
+                    "dns_api_key": {
+                      "type": "string"
+                    },
+                    "royalts_licencekey": {
+                      "type": "string"
+                    },
+                    "veeam_password": {
+                      "type": "string"
+                    },
+                    "veeam_user": {
+                      "type": "string"
+                    },
+                    "vsphere_password": {
+                      "type": "string"
+                    },
+                    "vsphere_user": {
+                      "type": "string"
+                    },
+                    "win_key": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "administrateur_password",
+                    "admoncloud_password",
+                    "choco_password",
+                    "dns_api_key",
+                    "royalts_licencekey",
+                    "veeam_password",
+                    "veeam_user",
+                    "vsphere_password",
+                    "vsphere_user",
+                    "win_key"
+                  ]
+                },
+                "deploy_vm": {
+                  "type": "object",
+                  "properties": {
+                    "has_windows": {
+                      "type": "boolean"
+                    },
+                    "has_plesk": {
+                      "type": "boolean"
+                    },
+                    "administrateur_password": {
+                      "type": "string"
+                    },
+                    "admoncloud_password": {
+                      "type": "string"
+                    },
+                    "choco_password": {
+                      "type": "string"
+                    },
+                    "veeam_password": {
+                      "type": "string"
+                    },
+                    "veeam_user": {
+                      "type": "string"
+                    },
+                    "vsphere_password": {
+                      "type": "string"
+                    },
+                    "vsphere_user": {
+                      "type": "string"
+                    },
+                    "win_key": {
+                      "type": "string"
+                    },
+                    "plesk_admin_password": {
+                      "type": "string"
+                    },
+                    "plesk_admin2_password": {
+                      "type": "string"
+                    },
+                    "plesk_licence": {
+                      "type": "string"
+                    },
+                    "influxdb_db_password": {
+                      "type": "string"
+                    },
+                    "sql_telegraf_password": {
+                      "type": "string"
+                    },
+                    "sql_sa_password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "veeam_password",
+                    "veeam_user",
+                    "vsphere_password",
+                    "vsphere_user"
+                  ]
+                }
+              },
+              "required": [
+                "nsx-networking",
+                "deploy_vm"
+              ]
+            },
+            "post_actions": {
+              "type": "object",
+              "properties": {
+                "nat_rules": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string"
+                      },
+                      "source": {
+                        "type": "string"
+                      },
+                      "destination": {
+                        "type": "string"
+                      },
+                      "source_network": {
+                        "type": "string"
+                      },
+                      "destination_network": {
+                        "type": "string"
+                      },
+                      "port": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "port",
+                      "action"
+                    ],
+                    "additional_properties": true
+                  }
+                },
+                "firewall_rules": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "direction": {
+                        "type": "string"
+                      },
+                      "action": {
+                        "type": "string"
+                      },
+                      "port": {
+                        "type": "integer"
+                      },
+                      "services": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "minItems": 1
+                      },
+                      "source": {
+                        "type": "string"
+                      },
+                      "destination": {
+                        "type": "string"
+                      },
+                      "context_profile": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "services"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "serial",
+            "metrology",
+            "mssql",
+            "custom_nat_rules",
+            "custom_firewall_rules",
+            "preparation",
+            "provisioning",
+            "post_actions"
+          ]
+        }
+      },
+      "required": [
+        "client_profile",
+        "deployment"
+      ]
+    }
+  },
+  "required": [
+    "process_onc_build"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "client_profile": {
+                "properties": {
+                  "mpls_bte": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "preparation": {
+                    "required": [
+                      "snat_ip"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "mssql": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "deployment": {
+                    "properties": {
+                      "preparation": {
+                        "required": [
+                          "mssql_ip"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "deployment": {
+                    "properties": {
+                      "provisioning": {
+                        "deploy_vm": {
+                          "required": [
+                            "sql_sa_password"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "metrology": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "deployment": {
+                    "properties": {
+                      "provisioning": {
+                        "required": [
+                          "metrology"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "process_onc_build": {
+                "properties": {
+                  "deployment": {
+                    "properties": {
+                      "provisioning": {
+                        "properties": {
+                          "deploy_vm": {
+                            "required": [
+                              "influxdb_db_password"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "client_profile": {
+                "properties": {
+                  "dedicated_vrf": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "provisioning": {
+                    "required": [
+                      "vm_gw"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "provisioning": {
+                    "properties": {
+                      "deploy_vm": {
+                        "properties": {
+                          "has_windows": {
+                            "const": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "provisioning": {
+                    "properties": {
+                      "deploy_vm": {
+                        "required": [
+                          "administrateur_password",
+                          "admoncloud_password",
+                          "choco_password",
+                          "win_key"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "provisioning": {
+                    "properties": {
+                      "deploy_vm": {
+                        "properties": {
+                          "has_plesk": {
+                            "const": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "provisioning": {
+                    "properties": {
+                      "deploy_vm": {
+                        "required": [
+                          "plesk_admin_password",
+                          "plesk_admin2_password",
+                          "plesk_licence"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "provisioning": {
+                    "properties": {
+                      "deploy_vm": {
+                        "properties": {
+                          "mssql_metrology": {
+                            "const": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "provisioning": {
+                    "properties": {
+                      "deploy_vm": {
+                        "required": [
+                          "sql_telegraf_password"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "custom_nat_rules": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "post_actions": {
+                    "required": [
+                      "nat_rules"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "custom_firewall_rules": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "process_onc_build": {
+            "properties": {
+              "deployment": {
+                "properties": {
+                  "post_actions": {
+                    "required": [
+                      "firewall_rules"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
